@@ -15,8 +15,7 @@ io.on('connection', socket => {
     socket.on('update',(data) =>{
         data.name = socket.name;
         console.log(data);
-        // 보낸사람을 제외한 나머지 사람들한테 메세지 전송함
-        socket.emit('update',data);
+        io.emit('update',data);
     });
 
     socket.on('disconnect',() =>{
