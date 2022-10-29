@@ -20,41 +20,50 @@ socket.on('connect',() => {
 })
 
 // 전송 함수
+let count = 0;
 
 socket.on('update',(data) =>{
     let message = document.getElementById('sendText').value;
     let ChatBox = document.getElementById('ChatBox');
-    console.log(data);
+    let name= "";
+    if(count == 1){
+       name = data.name;
+    }
+    console.log(name , count);
+
     if(data.name === 'SERVER'){
         ChatBox.innerHTML += "<div class='serverMsg'>"+ data.message +"</div>"
     }
-    else if(data.message == message){
-        console.log('탐1')
+    else if(data.message == message && data.name == name){
         ChatBox.innerHTML += "<div class='chat ch2'>" +
             "<div class='nickName'>"+data.name+"</div>" +
             "<div class='textbox'>"+data.message+"</div>" + "</div>"
         document.getElementById('sendText').value = '';
     }else{
-        console.log('탐2')
         ChatBox.innerHTML += "<div class='chat ch1'>" +
             "<div class='nickName'>"+data.name+"</div>" +
             "<div class='textbox'>"+data.message+"</div>" + "</div>"
         document.getElementById('sendText').value = '';
     }
+
     ChatBox.scrollTop = ChatBox.scrollHeight;
 
 })
 
-let count = 0;
+
 function send() {
     let message = document.getElementById('sendText').value;
+    if(message){
     if(count == 0){
         let send = `message=누군가 당신의 사이트에서 대화를 시도합니다.`
         let encodeValue = encodeURIComponent(send);
         axios.post(`https://script.google.com/macros/s/AKfycbxnUddp2p0467_DwYu65HswMGS2oFC1qsBCPs5Uyg/exec`,encodeValue);
+        count++;
     }
-    count++;
     socket.emit('update',{type: 'message' ,message: message})
+    }else{
+        alert("전송할 메세지를 입력해주세요!!");
+    }
 }
 function enterSend(){
     if (window.event.keyCode == 13) {
