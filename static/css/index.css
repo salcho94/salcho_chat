@@ -96,3 +96,9 @@ a {
 .sendBox{
     display: grid;
 }
+
+#sendText{
+    background-color: snow;
+    font-weight: bold;
+    font-family: "Arial Hebrew";
+}
