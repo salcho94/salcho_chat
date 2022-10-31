@@ -43,7 +43,6 @@ socket.on('update',(data) =>{
         ChatBox.innerHTML += "<div class='chat ch1'>" +
             "<div class='nickName'>"+data.name+"</div>" +
             "<div class='textbox'>"+data.message+"</div>" + "</div>"
-        document.getElementById('sendText').value = '';
     }
 
     ChatBox.scrollTop = ChatBox.scrollHeight;
