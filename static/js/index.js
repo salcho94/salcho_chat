@@ -54,9 +54,12 @@ function send() {
     let message = document.getElementById('sendText').value;
     if(message){
     if(count == 0){
-        let send = `message=누군가 당신의 사이트에서 대화를 시도합니다.`
-        let encodeValue = encodeURIComponent(send);
-        axios.post(`https://script.google.com/macros/s/AKfycbxnUddp2p0467_DwYu65HswMGS2oFC1qsBCPs5Uyg/exec`,encodeValue);
+        axios.get(`https://salcho.cf:3000/sendmail`, {
+            params: {
+                title :'누군가 당신의 사이트에서 대화를 시도합니다',
+                message : message,
+            }
+        });
         count++;
     }
     socket.emit('update',{type: 'message' ,message: message})
