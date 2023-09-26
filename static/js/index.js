@@ -27,7 +27,7 @@ socket.on('update',(data) =>{
     let ChatBox = document.getElementById('ChatBox');
     let name= "";
     if(count == 1){
-       name = data.name;
+        name = data.name;
     }
     console.log(name , count);
 
@@ -51,18 +51,20 @@ socket.on('update',(data) =>{
 
 
 function send() {
+    //let url =`http://localhost:5000/sendmail`;
+    let url =`https://salcho.kro.kr:3000/sendmail`;
     let message = document.getElementById('sendText').value;
     if(message){
-    if(count == 0){
-        axios.get(`https://salcho.cf:3000/sendmail`, {
-            params: {
-                title :'누군가 당신의 사이트에서 대화를 시도합니다',
-                message : message,
-            }
-        });
-        count++;
-    }
-    socket.emit('update',{type: 'message' ,message: message})
+        if(count == 0){
+            axios.get(url, {
+                params: {
+                    title :'누군가 당신의 사이트에서 대화를 시도합니다',
+                    message : message,
+                }
+            });
+            count++;
+        }
+        socket.emit('update',{type: 'message' ,message: message})
     }else{
         alert("전송할 메세지를 입력해주세요!!");
     }

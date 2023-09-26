@@ -5,9 +5,9 @@ const path = require('path');
 const HTTPS = require('https');
 try {
     const option = {
-        ca: fs.readFileSync('/etc/letsencrypt/live/salcho.cf/fullchain.pem'),
-        key: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/salcho.cf/privkey.pem'), 'utf8').toString(),
-        cert: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/salcho.cf/cert.pem'), 'utf8').toString(),
+        ca: fs.readFileSync('/etc/letsencrypt/live/salcho.kro.kr/fullchain.pem'),
+        key: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/salcho.kro.kr/privkey.pem'), 'utf8').toString(),
+        cert: fs.readFileSync(path.resolve(process.cwd(), '/etc/letsencrypt/live/salcho.kro.kr/cert.pem'), 'utf8').toString(),
     };
 
     const server = HTTPS.createServer(option, app).listen(7777,'0.0.0.0')
